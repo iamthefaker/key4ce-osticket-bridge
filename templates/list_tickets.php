@@ -1,6 +1,9 @@
 <?php
 /* Template Name: list_tickets.php */
 ?>
+<style>
+	.entry-content{max-width: 1100px !important;}
+</style>
 <script type="text/javascript">
 function checkAll(ele) {
      var checkboxes = document.getElementsByTagName('input');
@@ -19,8 +22,60 @@ function checkAll(ele) {
          }
      }
  }
+  jQuery( document ).ready(function() {
+  jQuery('#key4ce_ticket_list .noEdit').click(function(e){
+   e.stopPropagation();
+});
+});
 </script>
+<?php if($keyost_usercloseticket==0) { ?>
+<style>
+#key4ce_ticket_menu1
+{
+	width: 8.5% !important;
+}
+#key4ce_ticket_list1
+{
+	width: 8.5% !important;
+}
+#key4ce_ticket_menu2
+{
+    width: 47% !important;
+}
+#key4ce_ticket_list2
+{
+    width: 47% !important;
+}
+#key4ce_ticket_menu4
+{
+	width:11% !important;
+}
+#key4ce_ticket_list4
+{
+	width:11% !important;
+}
+#key4ce_ticket_menu5
+{
+	width:11% !important;
+}
+#key4ce_ticket_list5
+{
+	width:11% !important;
+}
+#key4ce_ticket_menu6
+{
+	width:250px !important;
+}
+#key4ce_ticket_list6
+{
+	width:250px !important;
+}
+</style>
+<?php } ?>
 <?php
+$time_format=key4ce_getKeyValue('time_format');
+$date_format=key4ce_getKeyValue('date_format');
+$datetime_format=key4ce_getKeyValue('datetime_format');
 if(isset($_POST['close']))
 {		
 	$close_ticket_list=$_POST['tickets'];
@@ -47,7 +102,6 @@ if(@$list_opt) {
 <div id="key4ce_ticket_menu1"><?php echo __("Tickets #", 'key4ce-osticket-bridge'); ?></div>
 <div id="key4ce_ticket_menu2"><?php echo __("Subject", 'key4ce-osticket-bridge'); ?></div>
 <div id="key4ce_ticket_menu3"><?php echo __("Status", 'key4ce-osticket-bridge'); ?></div>
-<div id="key4ce_ticket_menu4"><?php echo __("Department", 'key4ce-osticket-bridge'); ?></div>
 <div id="key4ce_ticket_menu5"><?php echo __("Date", 'key4ce-osticket-bridge'); ?></div>
 </div>
 <?php
@@ -82,10 +136,10 @@ if(@$list_opt) {
 		$ticket_view=get_permalink()."?service=view&ticket=".$list->number;
 		$ticket_tr="?service=view&ticket=".$list->number;
 	}
-	@$sub_str=Format::stripslashes($list->subject); 		
-	if($keyost_usercloseticket==1)
-	echo "<div id='key4ce_ticket_list0' style='float: left;line-height: 45px;'><input type='checkbox' name='tickets[]' value='".$list->ticket_id."'></div>";	
+	@$sub_str=Format::stripslashes($list->subject); 			
 	echo "<div id='key4ce_ticket_list' onclick=\"location.href='$ticket_view';\">"; 
+	if($keyost_usercloseticket==1)	
+	echo "<div id='key4ce_ticket_list0' class=\"noEdit\"><input type='checkbox' name='tickets[]' value='".$list->ticket_id."'></div>";
 	echo "<div id='key4ce_ticket_list1'><a href=$ticket_view>".$list->number."</a></div>"; 
 	echo "<div id='key4ce_ticket_list2'>".key4ce_truncate($sub_str,60,'...')."</div><div id='key4ce_ticket_list3'>"; 
 	if($list->status=='closed') { 
@@ -97,23 +151,21 @@ if(@$list_opt) {
 	elseif ($list->status=='open' && $list->isanswered=='1') { 
 	echo '<font color=orange>'.__("Answered", 'key4ce-osticket-bridge').'</font>'; 
 	} 
-	echo "</div><div id='key4ce_ticket_list4'>".$list->dept_name."</div>"; 
+	echo "</div>"; 
     if ($list->updated=='0000-00-00 00:00:00') {
 		$input_str  = "".$list->created.""; }
 		else {
    	$input_str  = "".$list->updated.""; }
-   	echo "<div id='key4ce_ticket_list5'>"; 
-   	echo substr($input_str,0,10); 
+   	echo "<div id='key4ce_ticket_list5'>"; 		echo date($datetime_format, strtotime($input_str));
    	echo "</div>"; 
-	echo "<div style='clear: both; display: table-cell;'></div></div>";
+	//echo "<div style='clear: both; display: table-cell;'></div>";
+	echo "</div>";
 	} } 
 	else 
 	{ 
-	echo '</div><div style="display: table; width: 100%;"><div align="center" id="no_tics" style="margin-top: 25px; text-align: center; font-size: 12pt; width: 100%; display:table-cell; float: left;"> <strong>'.__("You haven't created any tickets yet. Click the 'Create Ticket' button.", 'key4ce-osticket-bridge').'</strong></div>';
+	echo '</div><div style="display: table; width: 100%;"><div align="center" id="no_tics" style="margin-top: 25px; text-align: center; font-size: 12pt; width: 100%; display:table-cell; float: left;"> <strong>'.__("No Records Found.", 'key4ce-osticket-bridge').'</strong></div>';
 	} 
 ?>
-  <!-- Should say "No Records Found." in the line above... but language files were being ignored so I'm manually editing for a quick fix. 
-  You haven't created any tickets yet. Click the 'Create Ticket' button.-->
 </div>
 
 <?php 

@@ -289,21 +289,12 @@ elseif($status_opt=="answered") {
 elseif($status_opt=="closed") {
 	$status_opt='closed';
 	}
-if($keyost_version==194 || $keyost_version==195 || $keyost_version==1951)
-{
-$sql="SELECT $ticket_table.user_id,$ticket_table.number,$ticket_table.created, $ticket_table.updated, $ticket_table.ticket_id,$ticket_table.isanswered,$ticket_cdata.subject,$ticket_cdata.priority, '' AS dept_name
+
+$sql="SELECT $ticket_table.user_id,$ticket_table.number,$ticket_table.created, $ticket_table.updated, $ticket_table.ticket_id,$ticket_table.isanswered,$ticket_cdata.subject,$ticket_cdata.priority, 'Rabbit' AS dept_name
 FROM $ticket_table
 LEFT JOIN $ticket_cdata ON $ticket_cdata.ticket_id = $ticket_table.ticket_id
 INNER JOIN $ost_ticket_status ON $ost_ticket_status.id = $ticket_table.status_id";
-}
-else
-{
-$sql="SELECT $ticket_table.user_id,$ticket_table.number,$ticket_table.created, $ticket_table.updated, $ticket_table.ticket_id, $ticket_table.status,$ticket_table.isanswered,$ticket_cdata.subject,$ticket_cdata.priority_id, '' AS dept_name
-FROM $ticket_table
-LEFT JOIN $ticket_cdata ON $ticket_cdata.ticket_id = $ticket_table.ticket_id";
-}
-if($category && ($category!="all"))
-$sql.=" and $topic_table.topic_id = '".$category."'";
+
 if($status_opt && ($status_opt!="all") && @$search=="")
 {
 	if($keyost_version==194 || $keyost_version==195 || $keyost_version==1951)
