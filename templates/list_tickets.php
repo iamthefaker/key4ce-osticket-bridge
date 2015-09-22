@@ -136,6 +136,7 @@ if(@$list_opt) {
 		$ticket_view=get_permalink()."?service=view&ticket=".$list->number;
 		$ticket_tr="?service=view&ticket=".$list->number;
 	}
+  
 	@$sub_str=Format::stripslashes($list->subject); 			
 	echo "<div id='key4ce_ticket_list' onclick=\"location.href='$ticket_view';\">"; 
 	if($keyost_usercloseticket==1)	
@@ -163,7 +164,12 @@ if(@$list_opt) {
 	} } 
 	else 
 	{ 
-	echo '</div><div style="display: table; width: 100%;"><div align="center" id="no_tics" style="margin-top: 25px; text-align: center; font-size: 12pt; width: 100%; display:table-cell; float: left;"> <strong>'.__("No Records Found.", 'key4ce-osticket-bridge').'</strong></div>';
+	echo '</div><div style="display: table; width: 100%;"><div align="center" id="no_tics" style="margin-top: 25px; text-align: center; font-size: 12pt; width: 100%; display:table-cell; float: left;"> <strong>';
+  if($status_opt=="closed") 
+  echo "You don't have any closed Support Tickets.";
+  else
+  echo "You don't have any open or answered Support Tickets. Click the 'Create Ticket' button.";
+  echo '</strong></div>';
 	} 
 ?>
 </div>
