@@ -99,7 +99,6 @@ function addopenticketcount()
 	{
 	$num_rows=$ost_wpdb->get_var("SELECT COUNT(*) FROM $ticket_table
 	LEFT JOIN $ticket_cdata ON $ticket_cdata.ticket_id = $ticket_table.ticket_id
-	INNER JOIN $dept_table ON $dept_table.dept_id=$ticket_table.dept_id 
 	INNER JOIN $ost_ticket_status ON $ost_ticket_status.id=$ticket_table.status_id
 	WHERE $ost_ticket_status.state='open' AND ost_ticket.user_id='$user_id'");
 	}
@@ -107,7 +106,7 @@ function addopenticketcount()
 	{
 	$num_rows=$ost_wpdb->get_var("SELECT COUNT(*) FROM $ticket_table
 	LEFT JOIN $ticket_cdata ON $ticket_cdata.ticket_id = $ticket_table.ticket_id
-	INNER JOIN $dept_table ON $dept_table.dept_id=$ticket_table.dept_id WHERE $ticket_table.status='open' AND ost_ticket.user_id='$user_id'");
+	WHERE $ticket_table.status='open' AND ost_ticket.user_id='$user_id'");
 	}	if($num_rows > 0)
 		return $num_rows;
 	else
@@ -133,7 +132,6 @@ $ticket_cdata=$keyost_prefix."ticket__cdata";
 $ost_ticket_status=$keyost_prefix."ticket_status";
 $num_rows=$ost_wpdb->get_var("SELECT COUNT(*) FROM $ticket_table
 LEFT JOIN $ticket_cdata ON $ticket_cdata.ticket_id = $ticket_table.ticket_id
-INNER JOIN $dept_table ON $dept_table.dept_id=$ticket_table.dept_id 
 INNER JOIN $ost_ticket_status ON $ost_ticket_status.id=$ticket_table.status_id
 WHERE $ost_ticket_status.state='open' AND $ticket_table.isanswered='0'");
     $page_title = 'Support/Request List';

@@ -109,9 +109,11 @@ if(@$list_opt) {
 	} } 
 	else 
 	{ 
-	echo '</div><div style="display: table; width: 100%;"><div align="center" id="no_tics" style="margin-top: 25px; text-align: center; font-size: 12pt; width: 100%; display:table-cell; float: left;"> <strong>'.__("No Records Found.", 'key4ce-osticket-bridge').'</strong></div>';
+	echo '</div><div style="display: table; width: 100%;"><div align="center" id="no_tics" style="margin-top: 25px; text-align: center; font-size: 12pt; width: 100%; display:table-cell; float: left;"> <strong>'.__("You haven't created any tickets yet. Click the 'Create Ticket' button.", 'key4ce-osticket-bridge').'</strong></div>';
 	} 
 ?>
+  <!-- Should say "No Records Found." in the line above... but language files were being ignored so I'm manually editing for a quick fix. 
+  You haven't created any tickets yet. Click the 'Create Ticket' button.-->
 </div>
 
 <?php 

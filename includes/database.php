@@ -60,14 +60,14 @@ if($keyost_version==194 || $keyost_version==195 || $keyost_version==1951)
 {
 if(isset($ticket))
 {
-$ticketinfo=$ost_wpdb->get_row("SELECT $ticket_table.user_id,$ost_ticket_status.state as status,$ticket_table.number,$ticket_table.created,$ticket_table.ticket_id,$ticket_table.isanswered,$ost_user.name,$dept_table.dept_name,$ticket_cdata.priority,$ticket_cdata.subject,$ost_useremail.address FROM $ticket_table INNER JOIN $dept_table ON $dept_table.dept_id=$ticket_table.dept_id INNER JOIN $ost_user ON $ost_user.id=$ticket_table.user_id INNER JOIN $ost_ticket_status ON $ost_ticket_status.id=$ticket_table.status_id INNER JOIN $ost_useremail ON $ost_useremail.user_id=$ticket_table.user_id LEFT JOIN $ticket_cdata on $ticket_cdata.ticket_id = $ticket_table.ticket_id WHERE `number` ='$ticket'");
+$ticketinfo=$ost_wpdb->get_row("SELECT $ticket_table.user_id,$ost_ticket_status.state as status,$ticket_table.number,$ticket_table.created,$ticket_table.ticket_id,$ticket_table.isanswered,$ost_user.name,'' AS dept_name,$ticket_cdata.priority,$ticket_cdata.subject,$ost_useremail.address FROM $ticket_table INNER JOIN $ost_user ON $ost_user.id=$ticket_table.user_id INNER JOIN $ost_ticket_status ON $ost_ticket_status.id=$ticket_table.status_id INNER JOIN $ost_useremail ON $ost_useremail.user_id=$ticket_table.user_id LEFT JOIN $ticket_cdata on $ticket_cdata.ticket_id = $ticket_table.ticket_id WHERE `number` ='$ticket'");
 }
 }
 else
 {
 if(isset($ticket))
 {
-$ticketinfo=$ost_wpdb->get_row("SELECT $ticket_table.user_id,$ticket_table.number,$ticket_table.created,$ticket_table.ticket_id,$ticket_table.status,$ticket_table.isanswered,$ost_user.name,$dept_table.dept_name,$ticket_cdata.priority,$ticket_cdata.priority_id,$ticket_cdata.subject,$ost_useremail.address FROM $ticket_table INNER JOIN $dept_table ON $dept_table.dept_id=$ticket_table.dept_id INNER JOIN $ost_user ON $ost_user.id=$ticket_table.user_id INNER JOIN $ost_useremail ON $ost_useremail.user_id=$ticket_table.user_id LEFT JOIN $ticket_cdata on $ticket_cdata.ticket_id = $ticket_table.ticket_id WHERE `number` ='$ticket'");
+$ticketinfo=$ost_wpdb->get_row("SELECT $ticket_table.user_id,$ticket_table.number,$ticket_table.created,$ticket_table.ticket_id,$ticket_table.status,$ticket_table.isanswered,$ost_user.name,'' AS dept_name,$ticket_cdata.priority,$ticket_cdata.priority_id,$ticket_cdata.subject,$ost_useremail.address FROM $ticket_table INNER JOIN $ost_user ON $ost_user.id=$ticket_table.user_id INNER JOIN $ost_useremail ON $ost_useremail.user_id=$ticket_table.user_id LEFT JOIN $ticket_cdata on $ticket_cdata.ticket_id = $ticket_table.ticket_id WHERE `number` ='$ticket'");
 }
 }
 
@@ -109,20 +109,19 @@ if($user_id!="")
 if($keyost_version==194 || $keyost_version==195 || $keyost_version==1951)
 {
 $sql="";
-$sql="SELECT $ost_ticket_status.state as status,$ticket_table.user_id,$ticket_table.number,$ticket_table.created, $ticket_table.updated, $ticket_table.ticket_id,$ticket_table.isanswered,$ticket_cdata.subject,$ticket_cdata.priority, $dept_table.dept_name
+$sql="SELECT $ost_ticket_status.state as status,$ticket_table.user_id,$ticket_table.number,$ticket_table.created, $ticket_table.updated, $ticket_table.ticket_id,$ticket_table.isanswered,$ticket_cdata.subject,$ticket_cdata.priority, '' AS dept_name
 FROM $ticket_table
 LEFT JOIN $ticket_cdata ON $ticket_cdata.ticket_id = $ticket_table.ticket_id
-INNER JOIN $dept_table ON $dept_table.dept_id = $ticket_table.dept_id
 INNER JOIN $ost_ticket_status ON $ost_ticket_status.id=$ticket_table.status_id
 WHERE $ticket_table.user_id =$user_id";
 }
 else
 {
 $sql="";
-$sql="SELECT $ticket_table.user_id,$ticket_table.number,$ticket_table.created, $ticket_table.updated, $ticket_table.ticket_id, $ticket_table.status,$ticket_table.isanswered,$ticket_cdata.subject,$ticket_cdata.priority_id, $dept_table.dept_name
+$sql="SELECT $ticket_table.user_id,$ticket_table.number,$ticket_table.created, $ticket_table.updated, $ticket_table.ticket_id, $ticket_table.status,$ticket_table.isanswered,$ticket_cdata.subject,$ticket_cdata.priority_id, '' AS dept_name
       FROM $ticket_table
       LEFT JOIN $ticket_cdata ON $ticket_cdata.ticket_id = $ticket_table.ticket_id
-      INNER JOIN $dept_table ON $dept_table.dept_id = $ticket_table.dept_id WHERE $ticket_table.user_id =$user_id";
+      WHERE $ticket_table.user_id =$user_id";
 }
 
 if(@$category && (@$category!="all"))
