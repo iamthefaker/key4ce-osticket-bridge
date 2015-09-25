@@ -165,7 +165,7 @@ if(@$list_opt) {
 	else 
 	{ 
 	echo '</div><div style="display: table; width: 100%;"><div align="center" id="no_tics" style="margin-top: 25px; text-align: center; font-size: 12pt; width: 100%; display:table-cell; float: left;"> <strong>';
-  if($status_opt=="closed") 
+  if(isset($_REQUEST['status']) && $status_opt=="closed") 
   echo "You don't have any closed Support Tickets.";
   else
   echo "You don't have any open or answered Support Tickets. Click the 'Create Ticket' button.";
