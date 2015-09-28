@@ -54,7 +54,7 @@ function getPluginValue($plugin)
 	extract($config);
 	$ost_wpdb = new wpdb($username, $password, $database, $host);	
 	$getPluginValue=$ost_wpdb->get_var("SELECT isactive FROM ".$keyost_prefix."plugin WHERE `name` = '$plugin' AND isphar='1'");
-	return $getPluginValue;
+	return 1; //$getPluginValue;
 }
 function wpetss_forum_text($text){
 // convert links
