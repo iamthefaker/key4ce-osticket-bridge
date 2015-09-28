@@ -130,7 +130,12 @@ $user_id=$ost_wpdb->get_var("SELECT user_id FROM " . $keyost_prefix . "user_emai
             <div style="clear: both"></div>
             <div id="key4ce_new_ticket_subject"><?php echo __('Subject','key4ce-osticket-bridge'); ?>:</div>
             <div id="key4ce_new_ticket_subject_input"><input class="ost" id="subject" type="text" name="subject" size="35"/><font class="error">&nbsp;*</font></div>
-            <div style="clear: both"></div>
+            <div style="clear: both; height: 40px;"></div>
+            
+            <input type="hidden" id="deptId" name="deptId" value="Rabbit"/>
+            <input type="hidden" id="priority" name="priorityId" value="Normal"/>
+
+<!--            
             <div id="key4ce_new_ticket_catagory"><?php echo __('Catagories','key4ce-osticket-bridge'); ?>:</div>
             <div id="key4ce_new_ticket_catagory_input">
                 <select id="deptId" name="deptId">
@@ -141,6 +146,7 @@ $user_id=$ost_wpdb->get_var("SELECT user_id FROM " . $keyost_prefix . "user_emai
                     }
                     ?>
                 </select><font class="key4ce_error">&nbsp;*</font></div>
+                
             <div style="clear: both"></div>
             <div id="key4ce_new_ticket_priority"><?php echo __('Priority:','key4ce-osticket-bridge'); ?></div>
             <div id="key4ce_new_ticket_priority_input"><select id="priority" name="priorityId">
@@ -152,6 +158,8 @@ $user_id=$ost_wpdb->get_var("SELECT user_id FROM " . $keyost_prefix . "user_emai
                     ?>
                 </select><font class="key4ce_error">&nbsp;*</font></div>
             <div style="clear: both"></div>
+-->
+   
     
     <table class="key4ce_welcome key4ce_nobd" align="center" width="95%" cellpadding="3" cellspacing="3" border="0">
         <tr>
